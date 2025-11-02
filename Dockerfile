@@ -41,15 +41,9 @@ RUN a2enmod rewrite \
 # 复制源码并设置权限
 COPY . /var/www/html/
 WORKDIR /var/www/html
-RUN chown -R www-data:www-data /var/www/html \
+RUN chmod -R 777 /var/www/html \
     && mkdir -p /root/.composer \
-    && chown -R www-data:www-data /root/.composer
+    && chmod -R 777 /root/.composer
 
-# 直接安装依赖（移除validate，用www-data用户执行避免权限问题）
-USER www-data  # 切换到Apache运行用户，避免权限冲突
-RUN composer install --no-dev -vvv
-
-# 切回root用户执行后续命令（可选，不影响）
-USER root
-
-CMD ["apache2-foreground"]
+# 直接用root执行，添加参数跳过可能引发权限问题的脚本
+RUN composer install --no-dev -vvv --no-plugins --no-scripts
