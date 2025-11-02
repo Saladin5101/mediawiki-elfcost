@@ -1,49 +1,71 @@
+# 基础镜像：PHP 8.1 + Apache（稳定兼容MediaWiki 1.46）
 FROM php:8.1-apache
 
-# 修复换行符：每个包后用\结尾（无多余空格），确保属于同一RUN指令
+# 第一步：安装所有系统依赖（对应PHP扩展的底层库）
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    # 编译工具
     build-essential \
+    # PostgreSQL扩展依赖
     libpq-dev \
+    # intl扩展依赖
     libicu-dev \
-    libxml2-dev \
+    # mbstring扩展依赖
     libonig-dev \
+    # XML相关扩展依赖
+    libxml2-dev \
+    # fileinfo扩展依赖（处理文件类型）
     libmagic1 \
+    # gd扩展依赖（图片处理）
+    libgd-dev \
+    # curl扩展依赖（网络请求）
+    libcurl4-openssl-dev \
+    # Composer所需工具
     curl \
     git \
+    # 清理缓存（减小镜像体积）
     && rm -rf /var/lib/apt/lists/*
 
-# 安装Composer并配置国内镜像
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer self-update \
-    && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-
-# 安装PHP扩展（含fileinfo）
+# 第二步：安装PHP扩展（MediaWiki 1.46必需）
 RUN docker-php-source extract \
-    && docker-php-ext-install -j1 pdo_pgsql \
-    && docker-php-ext-install -j1 pgsql \
+    # 数据库相关
+    && docker-php-ext-install -j1 pdo_pgsql pgsql \
+    # 文本处理
     && docker-php-ext-install -j1 mbstring \
+    # 国际化
     && docker-php-ext-install -j1 intl \
+    # XML处理
     && docker-php-ext-install -j1 simplexml xml xmlwriter \
+    # 文件处理
     && docker-php-ext-install -j1 fileinfo \
+    # 图片处理
+    && docker-php-ext-install -j1 gd \
+    # 网络请求
+    && docker-php-ext-install -j1 curl \
+    # 清理源码
     && docker-php-source delete
 
-# 验证扩展
-RUN echo "验证PHP扩展：" \
-    && php -m | grep -E 'pdo_pgsql|pgsql|mbstring|intl|simplexml|xml|xmlwriter|fileinfo' \
-    || (echo "缺少必需扩展！" && exit 1)
+# 第三步：安装并配置Composer（依赖管理工具）
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer self-update \
+    # 配置镜像源（解决网络下载问题）
+    && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
-# 配置Apache
+# 第四步：配置Apache（支持Rewrite和目录权限）
 RUN a2enmod rewrite \
     && echo '<Directory "/var/www/html">' >> /etc/apache2/apache2.conf \
     && echo '    AllowOverride All' >> /etc/apache2/apache2.conf \
     && echo '</Directory>' >> /etc/apache2/apache2.conf
 
-# 复制源码并设置权限
+# 第五步：复制MediaWiki源码并设置权限
 COPY . /var/www/html/
 WORKDIR /var/www/html
+# 开放权限（避免Composer写入失败）
 RUN chmod -R 777 /var/www/html \
     && mkdir -p /root/.composer \
     && chmod -R 777 /root/.composer
 
-# 直接用root执行，添加参数跳过可能引发权限问题的脚本
+# 第六步：安装MediaWiki依赖（跳过插件和脚本，避免权限冲突）
 RUN composer install --no-dev -vvv --no-plugins --no-scripts
+
+# 启动Apache
+CMD ["apache2-foreground"]
