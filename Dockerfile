@@ -8,20 +8,20 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 提取PHP源码（供其他扩展编译）
+# 提取PHP源码
 RUN docker-php-source extract
 
-# 只安装非内置的扩展（pdo已内置，无需安装）
-RUN set -x && docker-php-ext-install -j1 -v pdo_pgsql  # PostgreSQL的PDO驱动（非内置）
-RUN set -x && docker-php-ext-install -j1 -v pgsql      # PostgreSQL原生驱动（非内置）
-RUN set -x && docker-php-ext-install -j1 -v mbstring   # 多字节字符串（部分环境需手动装）
-RUN set -x && docker-php-ext-install -j1 -v intl       # 国际化扩展（非内置）
-RUN set -x && docker-php-ext-install -j1 -v simplexml xml xmlwriter  # XML相关扩展
+# 安装扩展（移除无效的 -v 选项，只保留 -j1 单线程编译）
+RUN set -x && docker-php-ext-install -j1 pdo_pgsql
+RUN set -x && docker-php-ext-install -j1 pgsql
+RUN set -x && docker-php-ext-install -j1 mbstring
+RUN set -x && docker-php-ext-install -j1 intl
+RUN set -x && docker-php-ext-install -j1 simplexml xml xmlwriter
 
 # 清理源码
 RUN docker-php-source delete
 
-# 启用所有扩展（包括内置的pdo）
+# 启用扩展
 RUN docker-php-ext-enable pdo pdo_pgsql pgsql mbstring intl simplexml xml xmlwriter
 
 # 配置Apache
