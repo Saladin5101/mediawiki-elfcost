@@ -7,9 +7,9 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libxml2-dev \
     libonig-dev \
-    php-cli \  # Composer需要PHP命令行环境
-    curl \     # 用于下载Composer
-    git \      # Composer拉取依赖可能需要Git
+    php-cli \
+    curl \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # 第二步：安装Composer（PHP的依赖管理工具）
