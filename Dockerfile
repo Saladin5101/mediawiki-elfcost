@@ -1,20 +1,21 @@
 FROM php:8.1-apache
 
-# 安装必要依赖
+# 安装必要依赖（新增libonig-dev，mbstring的核心依赖）
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     libicu-dev \
     libxml2-dev \
+    libonig-dev \  # 新增：mbstring扩展必需的正则库
     && rm -rf /var/lib/apt/lists/*
 
 # 提取PHP源码
 RUN docker-php-source extract
 
-# 安装扩展（移除无效的 -v 选项，只保留 -j1 单线程编译）
+# 安装扩展（顺序不变，确保依赖正确）
 RUN set -x && docker-php-ext-install -j1 pdo_pgsql
 RUN set -x && docker-php-ext-install -j1 pgsql
-RUN set -x && docker-php-ext-install -j1 mbstring
+RUN set -x && docker-php-ext-install -j1 mbstring  # 现在有了libonig-dev，可正常编译
 RUN set -x && docker-php-ext-install -j1 intl
 RUN set -x && docker-php-ext-install -j1 simplexml xml xmlwriter
 
