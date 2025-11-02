@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libicu-dev \
     libxml2-dev \
-    libonig-dev 
+    libonig-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 提取PHP源码
