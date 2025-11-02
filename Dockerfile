@@ -45,8 +45,11 @@ RUN chown -R www-data:www-data /var/www/html \
     && mkdir -p /root/.composer \
     && chown -R www-data:www-data /root/.composer
 
-# 安装依赖
-RUN composer validate --no-check-publish \
-    && composer install --no-dev -vvv
+# 直接安装依赖（移除validate，用www-data用户执行避免权限问题）
+USER www-data  # 切换到Apache运行用户，避免权限冲突
+RUN composer install --no-dev -vvv
+
+# 切回root用户执行后续命令（可选，不影响）
+USER root
 
 CMD ["apache2-foreground"]
