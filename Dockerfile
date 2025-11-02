@@ -1,44 +1,36 @@
-# 用PHP 8.1稳定版
 FROM php:8.1-apache
 
-# 1. 安装最精简的必要依赖（只保留编译必需的）
+# 安装必要依赖
 RUN apt-get update && apt-get install -y \
     build-essential \
-    libc6-dev \
     libpq-dev \
     libicu-dev \
     libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. 提取PHP源码（供扩展编译使用）
+# 提取PHP源码（供其他扩展编译）
 RUN docker-php-source extract
 
-# 3. 直接用docker-php-ext-install安装扩展（内部会自动调用make）
-RUN set -x && docker-php-ext-install -j1 -v pdo
+# 只安装非内置的扩展（pdo已内置，无需安装）
+RUN set -x && docker-php-ext-install -j1 -v pdo_pgsql  # PostgreSQL的PDO驱动（非内置）
+RUN set -x && docker-php-ext-install -j1 -v pgsql      # PostgreSQL原生驱动（非内置）
+RUN set -x && docker-php-ext-install -j1 -v mbstring   # 多字节字符串（部分环境需手动装）
+RUN set -x && docker-php-ext-install -j1 -v intl       # 国际化扩展（非内置）
+RUN set -x && docker-php-ext-install -j1 -v simplexml xml xmlwriter  # XML相关扩展
 
-RUN set -x && docker-php-ext-install -j1 -v pdo_pgsql
-
-RUN set -x && docker-php-ext-install -j1 -v pgsql
-
-RUN set -x && docker-php-ext-install -j1 -v mbstring
-
-RUN set -x && docker-php-ext-install -j1 -v simplexml xml xmlwriter
-
-RUN set -x && docker-php-ext-install -j1 -v intl
-
-# 4. 清理源码
+# 清理源码
 RUN docker-php-source delete
 
-# 5. 启用扩展
-RUN docker-php-ext-enable pdo pdo_pgsql pgsql mbstring simplexml xml xmlwriter intl
+# 启用所有扩展（包括内置的pdo）
+RUN docker-php-ext-enable pdo pdo_pgsql pgsql mbstring intl simplexml xml xmlwriter
 
-# 6. 配置Apache（仅保留必需项）
+# 配置Apache
 RUN a2enmod rewrite
 RUN echo '<Directory "/var/www/html">' >> /etc/apache2/apache2.conf \
     && echo '    AllowOverride All' >> /etc/apache2/apache2.conf \
     && echo '</Directory>' >> /etc/apache2/apache2.conf
 
-# 7. 复制文件并修复权限
+# 复制文件并修复权限
 COPY . /var/www/html/
 RUN chown -R www-data:www-data /var/www/html
 
