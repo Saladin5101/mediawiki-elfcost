@@ -65,7 +65,9 @@ RUN chmod -R 777 /var/www/html \
     && chmod -R 777 /root/.composer
 
 # 第六步：安装MediaWiki依赖（跳过插件和脚本，避免权限冲突）
-RUN composer install --no-dev -vvv --no-plugins --no-scripts
-
+RUN rm -rf composer.lock  # 删除锁定文件，让Composer重新计算依赖
+RUN composer clear-cache  # 彻底清理旧缓存
+# 增加超时时间+优先下载压缩包，避免网络超时
+RUN composer install --no-dev -vvv --no-plugins --no-scripts --prefer-dist --timeout=300
 # 启动Apache
 CMD ["apache2-foreground"]
