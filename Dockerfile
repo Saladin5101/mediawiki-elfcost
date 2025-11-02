@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-# 安装必要依赖（新增libonig-dev，mbstring的核心依赖）
+# 安装必要依赖
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
@@ -12,18 +12,18 @@ RUN apt-get update && apt-get install -y \
 # 提取PHP源码
 RUN docker-php-source extract
 
-# 安装扩展（顺序不变，确保依赖正确）
+# 安装扩展（这些是需要手动安装的非内置扩展）
 RUN set -x && docker-php-ext-install -j1 pdo_pgsql
 RUN set -x && docker-php-ext-install -j1 pgsql
-RUN set -x && docker-php-ext-install -j1 mbstring  # 现在有了libonig-dev，可正常编译
+RUN set -x && docker-php-ext-install -j1 mbstring
 RUN set -x && docker-php-ext-install -j1 intl
 RUN set -x && docker-php-ext-install -j1 simplexml xml xmlwriter
 
 # 清理源码
 RUN docker-php-source delete
 
-# 启用扩展
-RUN docker-php-ext-enable pdo pdo_pgsql pgsql mbstring intl simplexml xml xmlwriter
+# 只启用手动安装的扩展（排除PHP内置的扩展，如pdo、xml基础组件等）
+RUN docker-php-ext-enable pdo_pgsql pgsql mbstring intl
 
 # 配置Apache
 RUN a2enmod rewrite
