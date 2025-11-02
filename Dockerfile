@@ -1,38 +1,48 @@
 FROM php:8.1-apache
 
-# 安装必要依赖
+# 第一步：安装系统依赖（新增Composer所需的php-cli、curl等）
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpq-dev \
     libicu-dev \
     libxml2-dev \
     libonig-dev \
+    php-cli \  # Composer需要PHP命令行环境
+    curl \     # 用于下载Composer
+    git \      # Composer拉取依赖可能需要Git
     && rm -rf /var/lib/apt/lists/*
 
-# 提取PHP源码
+# 第二步：安装Composer（PHP的依赖管理工具）
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# 第三步：提取PHP源码（供扩展编译）
 RUN docker-php-source extract
 
-# 安装扩展（这些是需要手动安装的非内置扩展）
+# 第四步：安装MediaWiki必需的PHP扩展
 RUN set -x && docker-php-ext-install -j1 pdo_pgsql
 RUN set -x && docker-php-ext-install -j1 pgsql
 RUN set -x && docker-php-ext-install -j1 mbstring
 RUN set -x && docker-php-ext-install -j1 intl
 RUN set -x && docker-php-ext-install -j1 simplexml xml xmlwriter
 
-# 清理源码
+# 第五步：清理PHP源码
 RUN docker-php-source delete
 
-# 只启用手动安装的扩展（排除PHP内置的扩展，如pdo、xml基础组件等）
+# 第六步：启用手动安装的扩展
 RUN docker-php-ext-enable pdo_pgsql pgsql mbstring intl
 
-# 配置Apache
+# 第七步：配置Apache
 RUN a2enmod rewrite
 RUN echo '<Directory "/var/www/html">' >> /etc/apache2/apache2.conf \
     && echo '    AllowOverride All' >> /etc/apache2/apache2.conf \
     && echo '</Directory>' >> /etc/apache2/apache2.conf
 
-# 复制文件并修复权限
+# 第八步：复制MediaWiki源码到Apache目录
 COPY . /var/www/html/
-RUN chown -R www-data:www-data /var/www/html
+
+# 第九步：用Composer安装MediaWiki的外部依赖（核心步骤！）
+WORKDIR /var/www/html  # 切换到MediaWiki根目录
+RUN composer install --no-dev  # --no-dev：只安装生产环境依赖，减小体积
+RUN chown -R www-data:www-data /var/www/html  # 修复依赖目录的权限
 
 CMD ["apache2-foreground"]
