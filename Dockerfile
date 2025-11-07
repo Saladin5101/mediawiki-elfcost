@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-# 第一步：安装系统依赖（确保有curl）
+# 第一步：安装系统依赖（修复换行符，确保所有包属于同一RUN指令）
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libicu-dev \
@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libmagic1 \
     libgd-dev \
     libcurl4-openssl-dev \
-    curl \  # 用curl替代wget
-    unzip \
+    curl \
+    unzip \  # 现在正确属于apt-get install的参数
     && rm -rf /var/lib/apt/lists/*
 
 # 第二步：安装PHP扩展
@@ -25,14 +25,12 @@ RUN a2enmod rewrite \
     && echo '    Require all granted' >> /etc/apache2/apache2.conf \
     && echo '</Directory>' >> /etc/apache2/apache2.conf
 
-# 第四步：用curl下载MediaWiki（更稳定，支持重试和超时）
+# 第四步：用curl下载MediaWiki
 WORKDIR /var/www
 RUN set -x \
-    # 用curl下载，重试5次，超时30秒
     && curl -fL --retry 5 --retry-delay 10 --connect-timeout 30 \
        https://releases.wikimedia.org/mediawiki/1.46/mediawiki-1.46.1.tar.gz \
        -o mediawiki.tar.gz \
-    # 解压并处理文件
     && tar -xzf mediawiki.tar.gz \
     && mv mediawiki-1.46.1 html \
     && rm mediawiki.tar.gz \
