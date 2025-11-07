@@ -1,24 +1,17 @@
-FROM mediawiki:1.46.1
+# 使用官方带Apache的1.46.1版本镜像（标签绝对存在）
+FROM mediawiki:1.46.1-apache
 
-# 单独更新包索引
+# 分步安装PostgreSQL驱动（无&&，无换行问题）
 RUN apt-get update
-
-# 单独安装PostgreSQL依赖库
 RUN apt-get install -y --no-install-recommends libpq-dev
-
-# 单独安装pgsql扩展
 RUN docker-php-ext-install pdo_pgsql
-
-# 单独清理缓存
 RUN rm -rf /var/lib/apt/lists/*
 
-# 单独启用Apache重写模块
+# 分步配置Apache（纯指令，无语法歧义）
 RUN a2enmod rewrite
-
-# 单独配置Apache目录权限（分多行echo，不用&&）
 RUN echo '<Directory "/var/www/html">' >> /etc/apache2/apache2.conf
 RUN echo '    AllowOverride All' >> /etc/apache2/apache2.conf
 RUN echo '</Directory>' >> /etc/apache2/apache2.conf
 
-# 启动命令
+# 启动服务
 CMD ["apache2-foreground"]
