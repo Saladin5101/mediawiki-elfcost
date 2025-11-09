@@ -183,6 +183,7 @@ use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\PasswordReset;
 use MediaWiki\User\Registration\UserRegistrationLookup;
+use MediaWiki\User\RestrictedUserGroupChecker;
 use MediaWiki\User\TalkPageNotificationManager;
 use MediaWiki\User\TempUser\RealTempUserConfig;
 use MediaWiki\User\TempUser\TempUserCreator;
@@ -201,6 +202,7 @@ use MediaWiki\User\UserRequirementsConditionCheckerFactory;
 use MediaWiki\Utils\UrlUtils;
 use MediaWiki\Watchlist\WatchedItemQueryService;
 use MediaWiki\Watchlist\WatchedItemStoreInterface;
+use MediaWiki\Watchlist\WatchlistLabelStore;
 use MediaWiki\Watchlist\WatchlistManager;
 use MessageCache;
 use MWLBFactory;
@@ -1894,6 +1896,13 @@ class MediaWikiServices extends ServiceContainer {
 	}
 
 	/**
+	 * @since 1.46
+	 */
+	public function getRestrictedUserGroupChecker(): RestrictedUserGroupChecker {
+		return $this->getService( 'RestrictedUserGroupChecker' );
+	}
+
+	/**
 	 * @since 1.37
 	 */
 	public function getRestrictionStore(): RestrictionStore {
@@ -2324,6 +2333,13 @@ class MediaWikiServices extends ServiceContainer {
 	 */
 	public function getWatchedItemStore(): WatchedItemStoreInterface {
 		return $this->getService( 'WatchedItemStore' );
+	}
+
+	/**
+	 * @since 1.46
+	 */
+	public function getWatchlistLabelStore(): WatchlistLabelStore {
+		return $this->getService( 'WatchlistLabelStore' );
 	}
 
 	/**

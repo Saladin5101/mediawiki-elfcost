@@ -257,6 +257,7 @@ use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\PasswordReset;
 use MediaWiki\User\Registration\LocalUserRegistrationProvider;
 use MediaWiki\User\Registration\UserRegistrationLookup;
+use MediaWiki\User\RestrictedUserGroupChecker;
 use MediaWiki\User\TalkPageNotificationManager;
 use MediaWiki\User\TempUser\RealTempUserConfig;
 use MediaWiki\User\TempUser\TempUserCreator;
@@ -277,6 +278,7 @@ use MediaWiki\Utils\UrlUtils;
 use MediaWiki\Watchlist\NoWriteWatchedItemStore;
 use MediaWiki\Watchlist\WatchedItemQueryService;
 use MediaWiki\Watchlist\WatchedItemStore;
+use MediaWiki\Watchlist\WatchlistLabelStore;
 use MediaWiki\Watchlist\WatchlistManager;
 use MediaWiki\WikiMap\WikiMap;
 use Psr\Http\Client\ClientInterface;
@@ -300,6 +302,7 @@ use Wikimedia\Rdbms\ReadOnlyMode;
 use Wikimedia\RequestTimeout\CriticalSectionProvider;
 use Wikimedia\RequestTimeout\RequestTimeout;
 use Wikimedia\Stats\IBufferingStatsdDataFactory;
+use Wikimedia\Stats\OutputFormats;
 use Wikimedia\Stats\PrefixingStatsdDataFactoryProxy;
 use Wikimedia\Stats\StatsCache;
 use Wikimedia\Stats\StatsFactory;
@@ -1014,13 +1017,10 @@ return [
 		$extHooks = $extRegistry->getAttribute( 'Hooks' );
 		$extDeprecatedHooks = $extRegistry->getAttribute( 'DeprecatedHooks' );
 
-		$hookRegistry = new StaticHookRegistry( $configHooks, $extHooks, $extDeprecatedHooks );
-		$hookContainer = new HookContainer(
-			$hookRegistry,
+		return new HookContainer(
+			new StaticHookRegistry( $configHooks, $extHooks, $extDeprecatedHooks ),
 			$services->getObjectFactory()
 		);
-
-		return $hookContainer;
 	},
 
 	'HtmlCacheUpdater' => static function ( MediaWikiServices $services ): HTMLCacheUpdater {
@@ -2108,6 +2108,15 @@ return [
 		return $rl;
 	},
 
+	'RestrictedUserGroupChecker' => static function ( MediaWikiServices $services ): RestrictedUserGroupChecker {
+		return new RestrictedUserGroupChecker(
+			new ServiceOptions(
+				RestrictedUserGroupChecker::CONSTRUCTOR_OPTIONS, $services->getMainConfig()
+			),
+			$services->getUserRequirementsConditionChecker(),
+		);
+	},
+
 	'RestrictionStore' => static function ( MediaWikiServices $services ): RestrictionStore {
 		return new RestrictionStore(
 			new ServiceOptions(
@@ -2354,7 +2363,7 @@ return [
 				[
 					'name' => 'fallback',
 					'styles' => [ 'mediawiki.skinning.interface', 'mediawiki.codex.messagebox.styles' ],
-					'templateDirectory' => __DIR__ . '/skins/templates/fallback',
+					'templateDirectory' => __DIR__ . '/Skin/templates/fallback',
 				]
 			]
 		], true );
@@ -2365,7 +2374,7 @@ return [
 				[
 					'name' => 'apioutput',
 					'styles' => [ 'mediawiki.skinning.interface' ],
-					'templateDirectory' => __DIR__ . '/skins/templates/apioutput',
+					'templateDirectory' => __DIR__ . '/Skin/templates/apioutput',
 				]
 			]
 		], true );
@@ -2385,7 +2394,7 @@ return [
 						'sitesubtitle',
 						'sitetitle',
 					],
-					'templateDirectory' => __DIR__ . '/skins/templates/authentication-popup',
+					'templateDirectory' => __DIR__ . '/Skin/templates/authentication-popup',
 				]
 			]
 		], true );
@@ -2397,7 +2406,7 @@ return [
 					'name' => 'json',
 					'styles' => [],
 					'format' => 'json',
-					'templateDirectory' => __DIR__ . '/skins/templates/apioutput',
+					'templateDirectory' => __DIR__ . '/Skin/templates/apioutput',
 				]
 			]
 		], true );
@@ -2458,14 +2467,14 @@ return [
 
 	'StatsFactory' => static function ( MediaWikiServices $services ): StatsFactory {
 		$config = $services->getMainConfig();
-		$format = \Wikimedia\Stats\OutputFormats::getFormatFromString(
+		$format = OutputFormats::getFormatFromString(
 			$config->get( MainConfigNames::StatsFormat ) ?? 'null'
 		);
 		$cache = new StatsCache;
-		$emitter = \Wikimedia\Stats\OutputFormats::getNewEmitter(
+		$emitter = OutputFormats::getNewEmitter(
 			$config->get( MainConfigNames::StatsPrefix ),
 			$cache,
-			\Wikimedia\Stats\OutputFormats::getNewFormatter( $format ),
+			OutputFormats::getNewFormatter( $format ),
 			$config->get( MainConfigNames::StatsTarget )
 		);
 		return new StatsFactory( $cache, $emitter, LoggerFactory::getInstance( 'Stats' ) );
@@ -2806,6 +2815,9 @@ return [
 			// TODO: Did anyone use this log group before? Should it be renamed? Or is there a better name we can use?
 			LoggerFactory::getInstance( 'UserGroupManager' ),
 			$services->getUserEditTracker(),
+			$services->getUserRegistrationLookup(),
+			$services->getUserFactory(),
+			RequestContext::getMain(),
 		);
 	},
 
@@ -2842,6 +2854,10 @@ return [
 		}
 
 		return $store;
+	},
+
+	'WatchlistLabelStore' => static function ( MediaWikiServices $services ): WatchlistLabelStore {
+		return new WatchlistLabelStore( $services->getConnectionProvider() );
 	},
 
 	'WatchlistManager' => static function ( MediaWikiServices $services ): WatchlistManager {
@@ -2917,7 +2933,6 @@ return [
 	'_ConditionalDefaultsLookup' => static function (
 		MediaWikiServices $services
 	): ConditionalDefaultsLookup {
-		$extraConditions = [];
 		return new ConditionalDefaultsLookup(
 			new HookRunner( $services->getHookContainer() ),
 			new ServiceOptions(

@@ -219,22 +219,6 @@ class MutableRevisionRecord extends RevisionRecord {
 	}
 
 	/**
-	 * Set revision hash, for optimization. Prevents getSha1() from re-calculating the hash.
-	 *
-	 * @note This should only be used if the calling code is sure that the given hash is correct
-	 * for the revision's content, and there is no chance of the content being manipulated
-	 * later. When in doubt, this method should not be called.
-	 *
-	 * @param string $sha1 SHA1 hash as a base36 string.
-	 * @return self
-	 */
-	public function setSha1( string $sha1 ) {
-		$this->mSha1 = $sha1;
-
-		return $this;
-	}
-
-	/**
 	 * Set nominal revision size, for optimization. Prevents getSize() from re-calculating the size.
 	 *
 	 * @note This should only be used if the calling code is sure that the given size is correct
@@ -355,10 +339,7 @@ class MutableRevisionRecord extends RevisionRecord {
 	 * @return string The revision hash, may be computed on the fly if not yet known.
 	 */
 	public function getSha1() {
-		// If not known, re-calculate and remember. Will be reset when slots change.
-		$this->mSha1 ??= $this->mSlots->computeSha1();
-
-		return $this->mSha1;
+		return $this->mSlots->computeSha1();
 	}
 
 	/**
@@ -377,7 +358,6 @@ class MutableRevisionRecord extends RevisionRecord {
 	 */
 	private function resetAggregateValues() {
 		$this->mSize = null;
-		$this->mSha1 = null;
 	}
 
 }

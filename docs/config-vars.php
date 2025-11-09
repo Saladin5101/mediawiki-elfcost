@@ -2640,6 +2640,12 @@ $wgConditionalUserOptions = null;
 $wgHiddenPrefs = null;
 
 /**
+ * Config variable stub for the UserJsPrefLimit setting, for use by phpdoc and IDEs.
+ * @see MediaWiki\MainConfigSchema::UserJsPrefLimit
+ */
+$wgUserJsPrefLimit = null;
+
+/**
  * Config variable stub for the InvalidUsernameCharacters setting, for use by phpdoc and IDEs.
  * @see MediaWiki\MainConfigSchema::InvalidUsernameCharacters
  */
@@ -2782,6 +2788,12 @@ $wgGroupsAddToSelf = null;
  * @see MediaWiki\MainConfigSchema::GroupsRemoveFromSelf
  */
 $wgGroupsRemoveFromSelf = null;
+
+/**
+ * Config variable stub for the RestrictedGroups setting, for use by phpdoc and IDEs.
+ * @see MediaWiki\MainConfigSchema::RestrictedGroups
+ */
+$wgRestrictedGroups = null;
 
 /**
  * Config variable stub for the RestrictionTypes setting, for use by phpdoc and IDEs.

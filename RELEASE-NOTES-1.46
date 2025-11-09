@@ -29,6 +29,9 @@ For notes on 1.45.x and older releases, see HISTORY.
   feature (see https://www.mediawiki.org/wiki/Help:Watchlist_labels for info).
   Note that the two new database tables for watchlist labels will be created
   regardless of the value of this flag. Defaults to false.
+* $wgUserJsPrefLimit – (T408733) This setting lets you limit the maximum number
+  of supported custom JS preferences each user can have, to reduce load. The
+  default value is 100.
 * …
 
 ==== Changed configuration ====
@@ -59,6 +62,7 @@ For notes on 1.45.x and older releases, see HISTORY.
 
 ===== New development-only external libraries =====
 
+* Updated symfony/yaml from 6.4.25 to 6.4.26.
 * …
 
 ==== Changed external libraries ====
@@ -79,6 +83,8 @@ For notes on 1.45.x and older releases, see HISTORY.
 
 === Action API changes in 1.46 ===
 
+* In the `action=parse` API endpoint, the value `prop=sections` has been
+  deprecated. Use `prop=tocdata` instead (T319141).
 * …
 
 === Action API internal changes in 1.46 ===
@@ -94,20 +100,38 @@ because of Phabricator reports.
 
 === Breaking changes in 1.46 ===
 
+* The SpecialWatchlistGetNonRevisionTypesHook has been removed. Instead,
+  extensions should ensure that rc_this_oldid is set to zero on recent changes
+  entries that do not relate to any particular revision.
+* MutableRevisionRecord::setSha1() has been removed without deprecation.
 * Passing something other than an Authority for the $performer parameter to
   WatchlistManager methods clearTitleUserNotifications() and
   clearAllUserNotifications, deprecated since 1.37, will now throw. User
   implements Authority and so is still permitted.
-* Passing something other than a PageIdentity for the $title parameter to
+* Passing something other than a PageReference for the $title parameter to
   WatchlistManager::getTitleNotificationTimestamp and
   clearTitleUserNotifications, deprecated since 1.37, will now throw.
 * Many WatchedItemStore methods took either PageIdentity or LinkTarget, with
   LinkTarget being deprecated since 1.37. Passing a LinkTarget which is not a
   PageReference will now throw.
+* The following methods of SpecialUserRights, deprecated in 1.45, have been
+  removed: userCanChangeRights, expiryToTimestamp, doSaveUserGroups,
+  fetchUser, changeableGroups. Callers should now use the equivalent methods
+  from UserGroupAssignmentService or MultiFormatUserIdentityLookup.
+* UserGroupsSpecialPage::canProcessExpiries (formerly
+  SpecialUserRights::canProcessExpiries), deprecated in 1.45, has been removed.
+  There's no replacement; the special page always assumes it can process
+  expiries.
 * …
 
 === Deprecations in 1.46 ===
 
+* Using an int for the $mode parameter of LanguageFallback::getAll() is now
+  deprecated.  Use the new LanguageFallbackMode enumeration instead.
+* LanguageFallback::MESSAGES and LanguageFallback::STRICT are deprecated; use
+  LanguageFallbackModes::{MESSAGES,STRICT} instead.
+* The AutopromoteCondition hook has been deprecated. Use
+  UserRequirementsCondition hook, instead.
 * …
 
 === Other changes in 1.46 ===

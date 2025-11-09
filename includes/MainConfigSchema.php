@@ -4810,7 +4810,7 @@ class MainConfigSchema {
 	/** @name   Language, regional and character encoding settings */
 
 	/**
-	 * Site language code. See includes/languages/data/Names.php for languages
+	 * Site language code. See includes/Languages/Data/Names.php for languages
 	 * supported by MediaWiki out of the box. Not all languages listed there have
 	 * translations, see languages/messages/ for the list of languages with some
 	 * localisation.
@@ -7069,8 +7069,7 @@ class MainConfigSchema {
 	 * every check should have a corresponding passwordpolicies-policy-<check> message,
 	 * and every settings field other than 'value' should have a corresponding
 	 * passwordpolicies-policyflag-<flag> message (<check> and <flag> are in lowercase).
-	 * The check message receives the policy value as a parameter, the flag message
-	 * receives the flag value (or values if it's an array).
+	 * The check message receives the policy value as a parameter.
 	 *
 	 * @since 1.26
 	 * @see \MediaWiki\Password\PasswordPolicyChecks
@@ -7657,6 +7656,14 @@ class MainConfigSchema {
 	];
 
 	/**
+	 * Maximum number of userjs preferences allowed for each user
+	 */
+	public const UserJsPrefLimit = [
+		'default' => 100,
+		'type' => 'int',
+	];
+
+	/**
 	 * Characters to prevent during new account creations.
 	 *
 	 * This is used in a regular expression character class during
@@ -8236,6 +8243,32 @@ class MainConfigSchema {
 	 * @see self::GroupsAddToSelf
 	 */
 	public const GroupsRemoveFromSelf = [
+		'default' => [],
+		'type' => 'map',
+	];
+
+	/**
+	 * A map of group names to the conditions under which the group can be granted.
+	 * The requirements are specified in the same way as for autopromotion.
+	 *
+	 * If `canBeIgnored` is set to true, these restrictions can be bypassed by users
+	 * who have the `ignore-restricted-groups` permission.
+	 *
+	 * If either of the `memberConditions` or `updaterConditions` keys are omitted,
+	 * they default to an empty array (i.e. no conditions). The default value for
+	 * `canBeIgnored` is false.
+	 *
+	 * ```
+	 * $wgRestrictedGroups = [
+	 *     'sysop' => [
+	 *         'memberConditions' => [ APCOND_EDITCOUNT, 1000 ],
+	 *         'updaterConditions' => [ !, APCOND_ISBOT ],
+	 *         'canBeIgnored' => false,
+	 *     ]
+	 * ]
+	 * ```
+	 */
+	public const RestrictedGroups = [
 		'default' => [],
 		'type' => 'map',
 	];

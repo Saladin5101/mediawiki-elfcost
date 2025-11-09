@@ -69,21 +69,21 @@ $wgAutoloadClasses += [
 	'FactoryArgTestTrait' => "$testDir/phpunit/unit/includes/FactoryArgTestTrait.php",
 	'TestLogger' => "$testDir/phpunit/mocks/TestLogger.php",
 
-	# tests/phpunit/includes/api
-	'ApiQueryTestBase' => "$testDir/phpunit/includes/api/query/ApiQueryTestBase.php",
-	'ApiTestCase' => "$testDir/phpunit/includes/api/ApiTestCase.php",
-	'ApiTestContext' => "$testDir/phpunit/includes/api/ApiTestContext.php",
-	'ApiUploadTestCase' => "$testDir/phpunit/includes/api/ApiUploadTestCase.php",
-	'RandomImageGenerator' => "$testDir/phpunit/includes/api/RandomImageGenerator.php",
-	'MediaWiki\\Tests\\Api\\Format\\ApiFormatTestBase' => "$testDir/phpunit/includes/api/format/ApiFormatTestBase.php",
-	'MediaWiki\\Tests\\Api\\Query\\ApiQueryTestBase' => "$testDir/phpunit/includes/api/query/ApiQueryTestBase.php",
-	'MediaWiki\\Tests\\Api\\Query\\ApiQueryContinueTestBase' => "$testDir/phpunit/includes/api/query/ApiQueryContinueTestBase.php",
-	'MediaWiki\\Tests\\Api\\ApiTestCase' => "$testDir/phpunit/includes/api/ApiTestCase.php",
-	'MediaWiki\\Tests\\Api\\ApiTestContext' => "$testDir/phpunit/includes/api/ApiTestContext.php",
-	'MediaWiki\\Tests\\Api\\ApiUploadTestCase' => "$testDir/phpunit/includes/api/ApiUploadTestCase.php",
-	'MediaWiki\\Tests\\Api\\MockApi' => "$testDir/phpunit/includes/api/MockApi.php",
-	'MediaWiki\\Tests\\Api\\MockApiQueryBase' => "$testDir/phpunit/includes/api/MockApiQueryBase.php",
-	'MediaWiki\\Tests\\Api\\RandomImageGenerator' => "$testDir/phpunit/includes/api/RandomImageGenerator.php",
+	# tests/phpunit/includes/Api
+	'ApiQueryTestBase' => "$testDir/phpunit/includes/Api/Query/ApiQueryTestBase.php",
+	'ApiTestCase' => "$testDir/phpunit/includes/Api/ApiTestCase.php",
+	'ApiTestContext' => "$testDir/phpunit/includes/Api/ApiTestContext.php",
+	'ApiUploadTestCase' => "$testDir/phpunit/includes/Api/ApiUploadTestCase.php",
+	'RandomImageGenerator' => "$testDir/phpunit/includes/Api/RandomImageGenerator.php",
+	'MediaWiki\\Tests\\Api\\Format\\ApiFormatTestBase' => "$testDir/phpunit/includes/Api/Format/ApiFormatTestBase.php",
+	'MediaWiki\\Tests\\Api\\Query\\ApiQueryTestBase' => "$testDir/phpunit/includes/Api/Query/ApiQueryTestBase.php",
+	'MediaWiki\\Tests\\Api\\Query\\ApiQueryContinueTestBase' => "$testDir/phpunit/includes/Api/Query/ApiQueryContinueTestBase.php",
+	'MediaWiki\\Tests\\Api\\ApiTestCase' => "$testDir/phpunit/includes/Api/ApiTestCase.php",
+	'MediaWiki\\Tests\\Api\\ApiTestContext' => "$testDir/phpunit/includes/Api/ApiTestContext.php",
+	'MediaWiki\\Tests\\Api\\ApiUploadTestCase' => "$testDir/phpunit/includes/Api/ApiUploadTestCase.php",
+	'MediaWiki\\Tests\\Api\\MockApi' => "$testDir/phpunit/includes/Api/MockApi.php",
+	'MediaWiki\\Tests\\Api\\MockApiQueryBase' => "$testDir/phpunit/includes/Api/MockApiQueryBase.php",
+	'MediaWiki\\Tests\\Api\\RandomImageGenerator' => "$testDir/phpunit/includes/Api/RandomImageGenerator.php",
 
 	# tests/phpunit/includes/Auth
 	'MediaWiki\\Auth\\AuthenticationRequestTestCase' =>
@@ -91,32 +91,33 @@ $wgAutoloadClasses += [
 	'MediaWiki\\Tests\\Auth\\AuthenticationRequestTestCase' =>
 		"$testDir/phpunit/includes/Auth/AuthenticationRequestTestCase.php",
 
-	# tests/phpunit/includes/block
-	'MediaWiki\\Tests\\Block\\Restriction\\RestrictionTestCase' => "$testDir/phpunit/includes/block/Restriction/RestrictionTestCase.php",
+	# tests/phpunit/includes/Block
+	'MediaWiki\\Tests\\Block\\Restriction\\RestrictionTestCase' => "$testDir/phpunit/includes/Block/Restriction/RestrictionTestCase.php",
 
-	# tests/phpunit/includes/recentchanges
-	'TestRecentChangesHelper' => "$testDir/phpunit/includes/recentchanges/TestRecentChangesHelper.php",
-	'MediaWiki\Tests\Recentchanges\ChangeTrackingUpdateSpyTrait' => "$testDir/phpunit/includes/recentchanges/ChangeTrackingUpdateSpyTrait.php",
+	# tests/phpunit/includes/RecentChanges
+	'TestRecentChangesHelper' => "$testDir/phpunit/includes/RecentChanges/TestRecentChangesHelper.php",
+	'MediaWiki\Tests\Recentchanges\ChangeTrackingUpdateSpyTrait' => "$testDir/phpunit/includes/RecentChanges/ChangeTrackingUpdateSpyTrait.php",
 
 	# tests/phpunit/includes/Config
 	'TestAllServiceOptionsUsed' => "$testDir/phpunit/includes/Config/TestAllServiceOptionsUsed.php",
 	'LoggedServiceOptions' => "$testDir/phpunit/includes/Config/LoggedServiceOptions.php",
 
 	# tests/phpunit/includes/Content
+	'DummyNonTextContent' => "$testDir/phpunit/mocks/Content/DummyNonTextContent.php",
+	'DummyContentForTesting' => "$testDir/phpunit/mocks/Content/DummyContentForTesting.php",
 	'MediaWiki\\Tests\\Content\\CssContentTest' => "$testDir/phpunit/includes/Content/CssContentTest.php",
-	'DummyContentHandlerForTesting' =>
-		"$testDir/phpunit/mocks/content/DummyContentHandlerForTesting.php",
-	'DummyContentForTesting' => "$testDir/phpunit/mocks/content/DummyContentForTesting.php",
-	'DummyNonTextContentHandler' => "$testDir/phpunit/mocks/content/DummyNonTextContentHandler.php",
-	'DummyNonTextContent' => "$testDir/phpunit/mocks/content/DummyNonTextContent.php",
-	'DummySerializeErrorContentHandler' =>
-		"$testDir/phpunit/mocks/content/DummySerializeErrorContentHandler.php",
+	'MediaWiki\\Tests\\Mocks\\Content\\DummyContentHandlerForTesting' =>
+		"$testDir/phpunit/mocks/Content/DummyContentHandlerForTesting.php",
+	'MediaWiki\\Tests\\Mocks\\Content\\DummyContentForTesting' => "$testDir/phpunit/mocks/Content/DummyContentForTesting.php",
+	'MediaWiki\\Tests\\Mocks\\Content\\DummyNonTextContentHandler' => "$testDir/phpunit/mocks/Content/DummyNonTextContentHandler.php",
+	'MediaWiki\\Tests\\Mocks\\Content\\DummyNonTextContent' => "$testDir/phpunit/mocks/Content/DummyNonTextContent.php",
+	'MediaWiki\\Tests\\Mocks\\Content\\DummySerializeErrorContentHandler' =>
+		"$testDir/phpunit/mocks/Content/DummySerializeErrorContentHandler.php",
 	'MediaWiki\\Tests\\Content\\JavaScriptContentTest' => "$testDir/phpunit/includes/Content/JavaScriptContentTest.php",
-	'TextContentTest' => "$testDir/phpunit/includes/Content/TextContentTest.php",
 	'MediaWiki\\Tests\\Content\\TextContentTest' => "$testDir/phpunit/includes/Content/TextContentTest.php",
-	'TextContentHandlerIntegrationTest' => "$testDir/phpunit/includes/Content/TextContentHandlerIntegrationTest.php",
+	'MediaWiki\\Tests\\Content\\TextContentHandlerIntegrationTest' => "$testDir/phpunit/includes/Content/TextContentHandlerIntegrationTest.php",
 	'MediaWiki\\Tests\\Content\\WikitextContentTest' => "$testDir/phpunit/includes/Content/WikitextContentTest.php",
-	'JavaScriptContentHandlerTest' => "$testDir/phpunit/includes/Content/JavaScriptContentHandlerTest.php",
+	'MediaWiki\\Tests\\Content\\JavaScriptContentHandlerTest' => "$testDir/phpunit/includes/Content/JavaScriptContentHandlerTest.php",
 	'MediaWiki\\Tests\\Content\\ContentSerializationTestTrait' => "$testDir/phpunit/includes/Content/ContentSerializationTestTrait.php",
 
 	# tests/phpunit/includes/DB
@@ -134,8 +135,9 @@ $wgAutoloadClasses += [
 	'ExternalStoreForTesting' => "$testDir/phpunit/includes/ExternalStore/ExternalStoreForTesting.php",
 	'MediaWiki\\Tests\\ExternalStore\\ExternalStoreForTesting' => "$testDir/phpunit/includes/ExternalStore/ExternalStoreForTesting.php",
 
-	# tests/phpunit/includes/logging
-	'LogFormatterTestCase' => "$testDir/phpunit/includes/logging/LogFormatterTestCase.php",
+	# tests/phpunit/includes/Logging
+	'LogFormatterTestCase' => "$testDir/phpunit/includes/Logging/LogFormatterTestCase.php",
+	'MediaWiki\\Tests\\Logging\\LogFormatterTestCase' => "$testDir/phpunit/includes/Logging/LogFormatterTestCase.php",
 
 	# tests/phpunit/includes/OutputTransform
 	'MediaWiki\\Tests\\OutputTransform\\DummyDOMTransformStage' => "$testDir/phpunit/includes/OutputTransform/DummyDOMTransformStage.php",
@@ -153,9 +155,9 @@ $wgAutoloadClasses += [
 	'MediaWiki\\Tests\\Parser\\ParserCacheSerializationTestCases' =>
 		"$testDir/phpunit/includes/Parser/ParserCacheSerializationTestCases.php",
 	'Wikimedia\\Tests\\SerializationTestTrait' =>
-		"$testDir/phpunit/includes/libs/serialization/SerializationTestTrait.php",
+		"$testDir/phpunit/includes/libs/Serialization/SerializationTestTrait.php",
 	'Wikimedia\\Tests\\SerializationTestUtils' =>
-		"$testDir/phpunit/includes/libs/serialization/SerializationTestUtils.php",
+		"$testDir/phpunit/includes/libs/Serialization/SerializationTestUtils.php",
 
 	# tests/phpunit/includes/ResourceLoader
 	'MediaWiki\\Tests\\ResourceLoader\\ImageModuleTest' =>
@@ -165,43 +167,47 @@ $wgAutoloadClasses += [
 	'MediaWiki\Tests\ResourceLoader\ResourceLoaderUpdateSpyTrait' =>
 		"$testDir/phpunit/includes/ResourceLoader/ResourceLoaderUpdateSpyTrait.php",
 
-	# tests/phpunit/includes/session
-	'MediaWiki\\Session\\TestBagOStuff' => "$testDir/phpunit/includes/session/TestBagOStuff.php",
-	'MediaWiki\\Tests\\Session\\TestBagOStuff' => "$testDir/phpunit/includes/session/TestBagOStuff.php",
-	'MediaWiki\\Tests\\Session\\TestUtils' => "$testDir/phpunit/includes/session/TestUtils.php",
+	# tests/phpunit/includes/Session
+	'MediaWiki\\Session\\TestBagOStuff' => "$testDir/phpunit/includes/Session/TestBagOStuff.php",
+	'MediaWiki\\Tests\\Session\\TestBagOStuff' => "$testDir/phpunit/includes/Session/TestBagOStuff.php",
+	'MediaWiki\\Tests\\Session\\TestUtils' => "$testDir/phpunit/includes/Session/TestUtils.php",
 
 	# tests/phpunit/includes/Site
 	'TestSites' => "$testDir/phpunit/includes/Site/TestSites.php",
 	'MediaWiki\\Tests\\Site\\SiteTest' => "$testDir/phpunit/includes/Site/SiteTest.php",
 	'MediaWiki\\Tests\\Site\\TestSites' => "$testDir/phpunit/includes/Site/TestSites.php",
 
-	# tests/phpunit/includes/specialpage
-	'MediaWiki\\Tests\\SpecialPage\\SpecialPageTestHelper' => "$testDir/phpunit/includes/specialpage/SpecialPageTestHelper.php",
-	'MediaWiki\\Tests\\SpecialPage\\AbstractChangesListSpecialPageTestCase' => "$testDir/phpunit/includes/specialpage/AbstractChangesListSpecialPageTestCase.php",
-	'MediaWiki\\Tests\\SpecialPage\\FormSpecialPageTestCase' => "$testDir/phpunit/includes/specialpage/FormSpecialPageTestCase.php",
+	# tests/phpunit/includes/SpecialPage
+	'MediaWiki\\Tests\\SpecialPage\\SpecialPageTestHelper' => "$testDir/phpunit/includes/SpecialPage/SpecialPageTestHelper.php",
+	'MediaWiki\\Tests\\SpecialPage\\AbstractChangesListSpecialPageTestCase' => "$testDir/phpunit/includes/SpecialPage/AbstractChangesListSpecialPageTestCase.php",
+	'MediaWiki\\Tests\\SpecialPage\\FormSpecialPageTestCase' => "$testDir/phpunit/includes/SpecialPage/FormSpecialPageTestCase.php",
 
-	# tests/phpunit/includes/specials
-	'SpecialPageTestBase' => "$testDir/phpunit/includes/specials/SpecialPageTestBase.php",
-	'SpecialPageExecutor' => "$testDir/phpunit/includes/specials/SpecialPageExecutor.php",
-	'SpecialSearchTestMockResultSet' => "$testDir/phpunit/includes/specials/SpecialSearchTestMockResultSet.php",
+	# tests/phpunit/includes/Specials
+	'SpecialPageTestBase' => "$testDir/phpunit/includes/Specials/SpecialPageTestBase.php",
+	'MediaWiki\\Tests\\Specials\\SpecialPageTestBase' => "$testDir/phpunit/includes/Specials/SpecialPageTestBase.php",
+	'SpecialPageExecutor' => "$testDir/phpunit/includes/Specials/SpecialPageExecutor.php",
+	'MediaWiki\\Tests\\Specials\\SpecialPageExecutor' => "$testDir/phpunit/includes/Specials/SpecialPageExecutor.php",
+	'MediaWiki\\Tests\\Specials\\SpecialSearchTestMockResultSet' => "$testDir/phpunit/includes/Specials/SpecialSearchTestMockResultSet.php",
 
 	# tests/phpunit/includes/Storage
 	'MediaWiki\\Tests\\Storage\\PageEditStashContentsTest' => "$testDir/phpunit/includes/Storage/PageEditStashContentsTest.php",
+	'MediaWiki\\Tests\\Storage\\TestMutableRevisionRecord' => "$testDir/phpunit/unit/includes/Storage/TestMutableRevisionRecord.php",
 
-	# tests/phpunit/includes/title
-	'TitleCodecTestBase' => "$testDir/phpunit/includes/title/TitleCodecTestBase.php",
+	# tests/phpunit/includes/Title
+	'TitleCodecTestBase' => "$testDir/phpunit/includes/Title/TitleCodecTestBase.php",
 
-	# test/phpunit/includes/user
-	'UserOptionsLookupTestBase' => "$testDir/phpunit/integration/includes/user/Options/UserOptionsLookupTestBase.php",
+	# test/phpunit/includes/User
+	'UserOptionsLookupTestBase' => "$testDir/phpunit/integration/includes/User/Options/UserOptionsLookupTestBase.php",
 
-	# tests/phpunit/includes/language
-	'DummyConverter' => "$testDir/phpunit/mocks/languages/DummyConverter.php",
-	'LanguageClassesTestCase' => "$testDir/phpunit/includes/language/LanguageClassesTestCase.php",
-	'LanguageConverterTestTrait' => "$testDir/phpunit/includes/language/LanguageConverterTestTrait.php",
-	'MessageTest' => "$testDir/phpunit/includes/language/MessageTest.php",
+	# tests/phpunit/includes/Language
+	'MediaWiki\\Tests\\Mocks\\Language\\DummyConverter' => "$testDir/phpunit/mocks/Language/DummyConverter.php",
+	'MediaWiki\\Tests\\Language\\LanguageClassesTestCase' => "$testDir/phpunit/includes/Language/LanguageClassesTestCase.php",
+	'MediaWiki\\Tests\\Language\\LanguageConverterTestTrait' => "$testDir/phpunit/includes/Language/LanguageConverterTestTrait.php",
+	'MediaWiki\\Tests\\Language\\LocalizationUpdateSpyTrait' => "$testDir/phpunit/includes/Language/LocalizationUpdateSpyTrait.php",
+	'MediaWiki\\Tests\\Language\\MessageTest' => "$testDir/phpunit/includes/Language/MessageTest.php",
 
 	# tests/phpunit/includes/libs
-	'BagOStuffTestBase' => "$testDir/phpunit/includes/libs/objectcache/BagOStuffTestBase.php",
+	'BagOStuffTestBase' => "$testDir/phpunit/includes/libs/ObjectCache/BagOStuffTestBase.php",
 	'Wikimedia\\Tests\\Diff\FakeDiffOp' => "$testDir/phpunit/unit/includes/libs/Diff/FakeDiffOp.php",
 	'Wikimedia\\Tests\\ParamValidator\\TypeDef\\TypeDefTestCase' => "$testDir/phpunit/unit/includes/libs/ParamValidator/TypeDef/TypeDefTestCase.php",
 	'Wikimedia\\Tests\\ParamValidator\\TypeDef\\TypeDefTestCaseTrait' => "$testDir/phpunit/unit/includes/libs/ParamValidator/TypeDef/TypeDefTestCaseTrait.php",
@@ -213,7 +219,7 @@ $wgAutoloadClasses += [
 	'MediaWiki\\Tests\\ParamValidator\\TypeDef\\TypeDefUnitTestCase' => "$testDir/phpunit/unit/includes/ParamValidator/TypeDef/TypeDefUnitTestCase.php",
 
 	# tests/phpunit/unit/includes/Search
-	'MediaWiki\Tests\Search\SearchUpdateSpyTrait' => "$testDir/phpunit/includes/search/SearchUpdateSpyTrait.php",
+	'MediaWiki\Tests\Search\SearchUpdateSpyTrait' => "$testDir/phpunit/includes/Search/SearchUpdateSpyTrait.php",
 
 	# tests/phpunit/maintenance
 	'MediaWiki\\Tests\\Maintenance\\DumpAsserter' => "$testDir/phpunit/maintenance/DumpAsserter.php",
@@ -221,13 +227,13 @@ $wgAutoloadClasses += [
 	'MediaWiki\\Tests\\Maintenance\\MaintenanceBaseTestCase' => "$testDir/phpunit/maintenance/MaintenanceBaseTestCase.php",
 	'MediaWiki\\Tests\\Maintenance\\PageDumpTestDataTrait' => "$testDir/phpunit/maintenance/PageDumpTestDataTrait.php",
 
-	# tests/phpunit/media
-	'FakeDimensionFile' => "$testDir/phpunit/includes/media/FakeDimensionFile.php",
-	'MediaWikiMediaTestCase' => "$testDir/phpunit/includes/media/MediaWikiMediaTestCase.php",
+	# tests/phpunit/includes/Media
+	'FakeDimensionFile' => "$testDir/phpunit/includes/Media/FakeDimensionFile.php",
+	'MediaWikiMediaTestCase' => "$testDir/phpunit/includes/Media/MediaWikiMediaTestCase.php",
 
 	# tests/phpunit/mocks
-	'DummySessionProvider' => "$testDir/phpunit/mocks/session/DummySessionProvider.php",
-	'MediaWiki\\Tests\\Session\\DummySessionBackend' => "$testDir/phpunit/mocks/session/DummySessionBackend.php",
+	'DummySessionProvider' => "$testDir/phpunit/mocks/Session/DummySessionProvider.php",
+	'MediaWiki\\Tests\\Session\\DummySessionBackend' => "$testDir/phpunit/mocks/Session/DummySessionBackend.php",
 	'MediaWiki\\Tests\\BrokenClass' => "$testDir/phpunit/mocks/BrokenClass.php",
 	'MediaWiki\\Tests\\BrokenClass2' => "$testDir/phpunit/mocks/BrokenClass2.php",
 	'MediaWiki\\Tests\\BrokenClass3' => "$testDir/phpunit/mocks/BrokenClass3.php",
@@ -238,28 +244,28 @@ $wgAutoloadClasses += [
 	'MediaWiki\\Tests\\Unit\\FakeQqxMessageLocalizer' => "$testDir/phpunit/mocks/FakeQqxMessageLocalizer.php",
 	'MediaWiki\\Tests\\Unit\\MockBlockTrait' => "$testDir/phpunit/mocks/MockBlockTrait.php",
 	'MediaWiki\\Tests\\Unit\\MockServiceDependenciesTrait' => "$testDir/phpunit/mocks/MockServiceDependenciesTrait.php",
-	'MediaWiki\\Tests\\Language\\MockLocalisationCacheTrait' => "$testDir/phpunit/mocks/languages/MockLocalisationCacheTrait.php",
-	'MockBitmapHandler' => "$testDir/phpunit/mocks/media/MockBitmapHandler.php",
+	'MediaWiki\\Tests\\Mocks\\Language\\MockLocalisationCacheTrait' => "$testDir/phpunit/mocks/Language/MockLocalisationCacheTrait.php",
+	'MockBitmapHandler' => "$testDir/phpunit/mocks/Media/MockBitmapHandler.php",
 	'MockChangesListFilter' => "$testDir/phpunit/mocks/MockChangesListFilter.php",
 	'MockChangesListFilterGroup' => "$testDir/phpunit/mocks/MockChangesListFilterGroup.php",
-	'MockCompletionSearchEngine' => "$testDir/phpunit/mocks/search/MockCompletionSearchEngine.php",
-	'MockDjVuHandler' => "$testDir/phpunit/mocks/media/MockDjVuHandler.php",
-	'MockFSFile' => "$testDir/phpunit/mocks/filebackend/MockFSFile.php",
-	'MockFileBackend' => "$testDir/phpunit/mocks/filebackend/MockFileBackend.php",
+	'MockCompletionSearchEngine' => "$testDir/phpunit/mocks/Search/MockCompletionSearchEngine.php",
+	'MockDjVuHandler' => "$testDir/phpunit/mocks/Media/MockDjVuHandler.php",
+	'MockFSFile' => "$testDir/phpunit/mocks/FileBackend/MockFSFile.php",
+	'MockFileBackend' => "$testDir/phpunit/mocks/FileBackend/MockFileBackend.php",
 	'MockHttpTrait' => "$testDir/phpunit/mocks/MockHttpTrait.php",
-	'MockImageHandler' => "$testDir/phpunit/mocks/media/MockImageHandler.php",
-	'MockLocalRepo' => "$testDir/phpunit/mocks/filerepo/MockLocalRepo.php",
+	'MockImageHandler' => "$testDir/phpunit/mocks/Media/MockImageHandler.php",
+	'MockLocalRepo' => "$testDir/phpunit/mocks/FileRepo/MockLocalRepo.php",
 	'MockMessageLocalizer' => "$testDir/phpunit/mocks/MockMessageLocalizer.php",
 	'MediaWiki\\Tests\\Mocks\\PoolCounter\\MockPoolCounterFailing' => "$testDir/phpunit/mocks/PoolCounter/MockPoolCounterFailing.php",
-	'MockSearchEngine' => "$testDir/phpunit/mocks/search/MockSearchEngine.php",
-	'MockSearchResult' => "$testDir/phpunit/mocks/search/MockSearchResult.php",
-	'MockSearchResultSet' => "$testDir/phpunit/mocks/search/MockSearchResultSet.php",
-	'MockSvgHandler' => "$testDir/phpunit/mocks/media/MockSvgHandler.php",
+	'MockSearchEngine' => "$testDir/phpunit/mocks/Search/MockSearchEngine.php",
+	'MockSearchResult' => "$testDir/phpunit/mocks/Search/MockSearchResult.php",
+	'MockSearchResultSet' => "$testDir/phpunit/mocks/Search/MockSearchResultSet.php",
+	'MockSvgHandler' => "$testDir/phpunit/mocks/Media/MockSvgHandler.php",
 	'MockTitleTrait' => "$testDir/phpunit/mocks/MockTitleTrait.php",
 	'NullGuzzleClient' => "$testDir/phpunit/mocks/NullGuzzleClient.php",
 	'NullHttpRequestFactory' => "$testDir/phpunit/mocks/NullHttpRequestFactory.php",
 	'NullMultiHttpClient' => "$testDir/phpunit/mocks/NullMultiHttpClient.php",
-	'MediaWiki\Tests\FileRepo\TestRepoTrait' => "$testDir/phpunit/mocks/filerepo/TestRepoTrait.php",
+	'MediaWiki\Tests\FileRepo\TestRepoTrait' => "$testDir/phpunit/mocks/FileRepo/TestRepoTrait.php",
 	'MediaWiki\\Tests\\MockEnvironment' => "$testDir/phpunit/mocks/MockEnvironment.php",
 
 	# tests/phpunit/unit/includes/Auth
@@ -268,39 +274,39 @@ $wgAutoloadClasses += [
 	# tests/phpunit/unit/includes/CommentFormatter
 	'MediaWiki\\Tests\\Unit\\CommentFormatter\\CommentFormatterTestUtils' => "$testDir/phpunit/unit/includes/CommentFormatter/CommentFormatterTestUtils.php",
 
-	# tests/phpunit/unit/includes/editpage/Constraint and tests/phpunit/integration/includes/editpage/Constraint
-	'EditConstraintTestTrait' => "$testDir/phpunit/unit/includes/editpage/Constraint/EditConstraintTestTrait.php",
+	# tests/phpunit/unit/includes/EditPage/Constraint and tests/phpunit/integration/includes/EditPage/Constraint
+	'EditConstraintTestTrait' => "$testDir/phpunit/unit/includes/EditPage/Constraint/EditConstraintTestTrait.php",
 
-	# tests/phpunit/unit/includes/filebackend
-	'FileBackendGroupTestTrait' => "$testDir/phpunit/unit/includes/filebackend/FileBackendGroupTestTrait.php",
-	'FileBackendIntegrationTestBase' => "$testDir/phpunit/integration/includes/libs/filebackend/FileBackendIntegrationTestBase.php",
+	# tests/phpunit/unit/includes/FileBackend
+	'FileBackendGroupTestTrait' => "$testDir/phpunit/unit/includes/FileBackend/FileBackendGroupTestTrait.php",
+	'FileBackendIntegrationTestBase' => "$testDir/phpunit/integration/includes/libs/FileBackend/FileBackendIntegrationTestBase.php",
 
 	# tests/phpunit/unit/includes/HookContainer
 	'MediaWiki\\Tests\\HookContainer\\HookRunnerTestBase' => "$testDir/phpunit/unit/includes/HookContainer/HookRunnerTestBase.php",
 
-	# tests/phpunit/unit/includes/json
-	'MediaWiki\\Tests\\Json\\JsonDeserializableSubClass' => "$testDir/phpunit/mocks/json/JsonDeserializableSubClass.php",
-	'MediaWiki\\Tests\\Json\\JsonDeserializableSubClassAlias' => "$testDir/phpunit/mocks/json/JsonDeserializableSubClass.php",
-	'MediaWiki\\Tests\\Json\\JsonDeserializableSuperClass' => "$testDir/phpunit/mocks/json/JsonDeserializableSuperClass.php",
-	'MediaWiki\\Tests\\Json\\ManagedObject' => "$testDir/phpunit/mocks/json/ManagedObject.php",
-	'MediaWiki\\Tests\\Json\\ManagedObjectFactory' => "$testDir/phpunit/mocks/json/ManagedObjectFactory.php",
-	'MediaWiki\\Tests\\Json\\PlainJsonJwtCodec' => "$testDir/phpunit/mocks/json/PlainJsonJwtCodec.php",
-	'MediaWiki\\Tests\\Json\\SampleContainerObject' => "$testDir/phpunit/mocks/json/SampleContainerObject.php",
-	'MediaWiki\\Tests\\Json\\SampleObject' => "$testDir/phpunit/mocks/json/SampleObject.php",
-	'MediaWiki\\Tests\\Json\\SampleObjectAlias' => "$testDir/phpunit/mocks/json/SampleObject.php",
+	# tests/phpunit/unit/includes/Json
+	'MediaWiki\\Tests\\Json\\JsonDeserializableSubClass' => "$testDir/phpunit/mocks/Json/JsonDeserializableSubClass.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\JsonDeserializableSubClass' => "$testDir/phpunit/mocks/Json/JsonDeserializableSubClass.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\JsonDeserializableSubClassAlias' => "$testDir/phpunit/mocks/Json/JsonDeserializableSubClass.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\JsonDeserializableSuperClass' => "$testDir/phpunit/mocks/Json/JsonDeserializableSuperClass.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\ManagedObject' => "$testDir/phpunit/mocks/Json/ManagedObject.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\ManagedObjectFactory' => "$testDir/phpunit/mocks/Json/ManagedObjectFactory.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\PlainJsonJwtCodec' => "$testDir/phpunit/mocks/Json/PlainJsonJwtCodec.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\SampleContainerObject' => "$testDir/phpunit/mocks/Json/SampleContainerObject.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\SampleObject' => "$testDir/phpunit/mocks/Json/SampleObject.php",
+	'MediaWiki\\Tests\\Mocks\\Json\\SampleObjectAlias' => "$testDir/phpunit/mocks/Json/SampleObject.php",
 
-	# tests/phpunit/unit/includes/language
-	'LanguageCodeTest' => "$testDir/phpunit/unit/includes/language/LanguageCodeTest.php",
-	'LanguageFallbackTestTrait' => "$testDir/phpunit/unit/includes/language/LanguageFallbackTestTrait.php",
-	'LanguageNameUtilsTestTrait' => "$testDir/phpunit/unit/includes/language/LanguageNameUtilsTestTrait.php",
-	'MediaWiki\Tests\Language\LocalizationUpdateSpyTrait' => "$testDir/phpunit/includes/language/LocalizationUpdateSpyTrait.php",
+	# tests/phpunit/unit/includes/Language
+	'MediaWiki\\Tests\\Unit\\Language\\LanguageCodeTest' => "$testDir/phpunit/unit/includes/Language/LanguageCodeTest.php",
+	'MediaWiki\\Tests\\Unit\\Language\\LanguageFallbackTestTrait' => "$testDir/phpunit/unit/includes/Language/LanguageFallbackTestTrait.php",
+	'MediaWiki\\Tests\\Unit\\Language\\LanguageNameUtilsTestTrait' => "$testDir/phpunit/unit/includes/Language/LanguageNameUtilsTestTrait.php",
 
-	# tests/phpunit/unit/includes/libs/filebackend/fsfile
-	'Wikimedia\\Tests\\FileBackend\\FSFile\\TempFSFileTestTrait' => "$testDir/phpunit/unit/includes/libs/filebackend/fsfile/TempFSFileTestTrait.php",
+	# tests/phpunit/unit/includes/libs/FileBackend/FSFile
+	'Wikimedia\\Tests\\FileBackend\\FSFile\\TempFSFileTestTrait' => "$testDir/phpunit/unit/includes/libs/FileBackend/FSFile/TempFSFileTestTrait.php",
 
-	# tests/phpunit/unit/includes/libs/filebackend/fsfile
-	'MediaWiki\\Tests\\Unit\\Libs\\Rdbms\\AddQuoterMock' => "$testDir/phpunit/unit/includes/libs/rdbms/AddQuoterMock.php",
-	'MediaWiki\\Tests\\Unit\\Libs\\Rdbms\\SQLPlatformTestHelper' => "$testDir/phpunit/unit/includes/libs/rdbms/SQLPlatformTestHelper.php",
+	# tests/phpunit/unit/includes/libs/Rdbms
+	'MediaWiki\\Tests\\Unit\\Libs\\Rdbms\\AddQuoterMock' => "$testDir/phpunit/unit/includes/libs/Rdbms/AddQuoterMock.php",
+	'MediaWiki\\Tests\\Unit\\Libs\\Rdbms\\SQLPlatformTestHelper' => "$testDir/phpunit/unit/includes/libs/Rdbms/SQLPlatformTestHelper.php",
 
 	# tests/phpunit/unit/includes/libs/Message
 	'Wikimedia\\Tests\\Message\\DataMessageValueTest' => "$testDir/phpunit/unit/includes/libs/Message/DataMessageValueTest.php",
@@ -322,26 +328,26 @@ $wgAutoloadClasses += [
 	'MediaWiki\\Tests\\ExtensionJsonTestBase' => "$testDir/phpunit/integration/includes/ExtensionJsonTestBase.php",
 	'MediaWiki\\Tests\\ExtensionServicesTestBase' => "$testDir/phpunit/integration/includes/ExtensionServicesTestBase.php",
 
-	# tests/phpunit/integration/includes/edit
-	'MediaWiki\\Tests\\Integration\\Edit\\SimpleParsoidOutputStashSerializationTest' => "$testDir/phpunit/integration/includes/edit/SimpleParsoidOutputStashSerializationTest.php",
+	# tests/phpunit/integration/includes/Edit
+	'MediaWiki\\Tests\\Integration\\Edit\\SimpleParsoidOutputStashSerializationTest' => "$testDir/phpunit/integration/includes/Edit/SimpleParsoidOutputStashSerializationTest.php",
 
 	# tests/phpunit/integration/includes/HTMLForm
 	'MediaWiki\\Tests\\Integration\\HTMLForm\\HTMLFormFieldTestCase' => "$testDir/phpunit/integration/includes/HTMLForm/HTMLFormFieldTestCase.php",
 
 	# tests/phpunit/integration/includes/libs
-	'LockManagerIntegrationTestBase' => "$testDir/phpunit/integration/includes/libs/lockmanager/LockManagerIntegrationTestBase.php",
+	'LockManagerIntegrationTestBase' => "$testDir/phpunit/integration/includes/libs/LockManager/LockManagerIntegrationTestBase.php",
 
 	# tests/phpunit/integration/includes/Rest/Handler
 	'MediaWiki\\Tests\\Rest\\Handler\\HandlerIntegrationTestTrait' => "$testDir/phpunit/integration/includes/Rest/Handler/HandlerIntegrationTestTrait.php",
 
-	# tests/phpunit/integration/includes/user
-	'MediaWiki\\Tests\\User\\ActorStoreTestBase' => "$testDir/phpunit/integration/includes/user/ActorStoreTestBase.php",
+	# tests/phpunit/integration/includes/User
+	'MediaWiki\\Tests\\User\\ActorStoreTestBase' => "$testDir/phpunit/integration/includes/User/ActorStoreTestBase.php",
 
-	# tests/phpunit/integration/includes/user/Options
-	'MediaWiki\\Tests\\User\\Options\\MockUserOptionsStore' => "$testDir/phpunit/integration/includes/user/Options/MockUserOptionsStore.php",
+	# tests/phpunit/integration/includes/User/Options
+	'MediaWiki\\Tests\\User\\Options\\MockUserOptionsStore' => "$testDir/phpunit/integration/includes/User/Options/MockUserOptionsStore.php",
 
-	# tests/phpunit/integration/includes/user/TempUser
-	'MediaWiki\\Tests\\User\\TempUser\\TempUserTestTrait' => "$testDir/phpunit/integration/includes/user/TempUser/TempUserTestTrait.php",
+	# tests/phpunit/integration/includes/User/TempUser
+	'MediaWiki\\Tests\\User\\TempUser\\TempUserTestTrait' => "$testDir/phpunit/integration/includes/User/TempUser/TempUserTestTrait.php",
 
 	# tests/phpunit/structure
 	'MediaWiki\\Tests\\Structure\\AbstractSchemaTestBase' => "$testDir/phpunit/structure/AbstractSchemaTestBase.php",
@@ -353,7 +359,7 @@ $wgAutoloadClasses += [
 	'MediaWiki\\Tests\\Rest\\Handler\\SessionHelperTestTrait' => "$testDir/phpunit/unit/includes/Rest/SessionHelperTestTrait.php",
 
 	# tests/phpunit/unit/includes/Rest/Handler
-	'MediaWiki\\Tests\\Unit\\Permissions\\MockAuthorityTrait' => "$testDir/phpunit/mocks/permissions/MockAuthorityTrait.php",
+	'MediaWiki\\Tests\\Unit\\Permissions\\MockAuthorityTrait' => "$testDir/phpunit/mocks/Permissions/MockAuthorityTrait.php",
 	'MediaWiki\\Tests\\Rest\\Handler\\ActionModuleBasedHandlerTestTrait' => "$testDir/phpunit/unit/includes/Rest/Handler/ActionModuleBasedHandlerTestTrait.php",
 	'MediaWiki\\Tests\\Rest\\Handler\\HTMLHandlerTestTrait' => "$testDir/phpunit/integration/includes/Rest/Handler/HTMLHandlerTestTrait.php",
 	'MediaWiki\\Tests\\Rest\\Handler\\LintHandlerTestTrait' => "$testDir/phpunit/integration/includes/Rest/Handler/LintHandlerTestTrait.php",
@@ -374,9 +380,9 @@ $wgAutoloadClasses += [
 	# tests/phpunit/unit/includes/Settings/Source
 	'MediaWiki\\Tests\\Unit\\Settings\\Source\\ExampleDefinitionsClass' => "$testDir/phpunit/unit/includes/Settings/Source/ExampleDefinitionsClass.php",
 
-	# tests/phpunit/unit/includes/session
-	'MediaWiki\\Tests\\Session\\SessionProviderTestTrait' => "$testDir/phpunit/unit/includes/session/SessionProviderTestTrait.php",
-	'MediaWiki\\Tests\\Session\\SessionStoreTestTrait' => "$testDir/phpunit/unit/includes/session/SessionStoreTestTrait.php",
+	# tests/phpunit/unit/includes/Session
+	'MediaWiki\\Tests\\Session\\SessionProviderTestTrait' => "$testDir/phpunit/unit/includes/Session/SessionProviderTestTrait.php",
+	'MediaWiki\\Tests\\Session\\SessionStoreTestTrait' => "$testDir/phpunit/unit/includes/Session/SessionStoreTestTrait.php",
 
 	# tests/suites
 	'ParserTestFileSuite' => "$testDir/phpunit/suites/ParserTestFileSuite.php",

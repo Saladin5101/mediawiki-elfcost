@@ -158,6 +158,7 @@ class PermissionManager {
 		'edituserjson',
 		'edituserjs',
 		'hideuser',
+		'ignore-restricted-groups',
 		'import',
 		'importupload',
 		'interwiki',
@@ -272,7 +273,7 @@ class PermissionManager {
 	 *
 	 * @return bool
 	 */
-	public function userCan( $action, User $user, LinkTarget $page, $rigor = self::RIGOR_SECURE ): bool {
+	public function userCan( $action, User $user, LinkTarget $page, $rigor = self::RIGOR_FULL ): bool {
 		return $this->getPermissionStatus( $action, $user, $page, $rigor, true )->isGood();
 	}
 

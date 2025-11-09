@@ -1780,7 +1780,7 @@ class OutputPage extends ContextSource {
 	/**
 	 * Ensure that the category lists are sorted, so that we don't
 	 * inadvertently depend on the exact evaluation order of various
-	 * ParserOutput fragments.
+	 * ParserOutput fragments. Also, remove duplicates.
 	 */
 	private function maybeSortCategories(): void {
 		if ( $this->mCategoriesSorted ) {
@@ -1800,6 +1800,9 @@ class OutputPage extends ContextSource {
 					$a['link'] <=> $b['link'];
 			} );
 		}
+		// Remove duplicate entries
+		$this->mCategoryData = array_values( array_unique( $this->mCategoryData, SORT_REGULAR ) );
+
 		// Rebuild mCategories and mCategoryLinks
 		$this->mCategories = [
 			'hidden' => [],
@@ -3907,6 +3910,15 @@ class OutputPage extends ContextSource {
 		$this->getHookRunner()->onOutputPageBodyAttributes( $this, $sk, $bodyAttrs );
 
 		$pieces[] = Html::openElement( 'body', $bodyAttrs );
+
+		// Add dedicated ARIA live region container for notifications to assistive technology users.
+		// Note that `aria-atomic="false"` and `aria-relevant="additions text"` are the default
+		// values and therefore not duplicated below.
+		$pieces[] = Html::rawElement( 'div', [
+			'id' => 'mw-aria-live-region',
+			'class' => 'mw-aria-live-region',
+			'aria-live' => 'polite',
+		], '' );
 
 		return self::combineWrappedStrings( $pieces );
 	}

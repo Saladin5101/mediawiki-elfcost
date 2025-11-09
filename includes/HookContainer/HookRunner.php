@@ -393,7 +393,6 @@ class HookRunner implements
 	\MediaWiki\Hook\SpecialUploadCompleteHook,
 	\MediaWiki\Hook\SpecialUserRightsChangeableGroupsHook,
 	\MediaWiki\Hook\SpecialVersionVersionUrlHook,
-	\MediaWiki\Hook\SpecialWatchlistGetNonRevisionTypesHook,
 	\MediaWiki\Hook\SpecialWhatLinksHereQueryHook,
 	\MediaWiki\Hook\TestCanonicalRedirectHook,
 	\MediaWiki\Hook\ThumbnailBeforeProduceHTMLHook,
@@ -569,6 +568,7 @@ class HookRunner implements
 	\MediaWiki\User\Hook\UserArrayFromResultHook,
 	\MediaWiki\User\Hook\UserCanSendEmailHook,
 	\MediaWiki\User\Hook\UserClearNewTalkNotificationHook,
+	\MediaWiki\User\Hook\UserRequirementsConditionHook,
 	\MediaWiki\User\Hook\UserEffectiveGroupsHook,
 	\MediaWiki\User\Hook\UserGetDefaultOptionsHook,
 	\MediaWiki\User\Hook\UserGetEmailAuthenticationTimestampHook,
@@ -4471,14 +4471,6 @@ class HookRunner implements
 	}
 
 	/** @inheritDoc */
-	public function onSpecialWatchlistGetNonRevisionTypes( &$nonRevisionTypes ) {
-		return $this->container->run(
-			'SpecialWatchlistGetNonRevisionTypes',
-			[ &$nonRevisionTypes ]
-		);
-	}
-
-	/** @inheritDoc */
 	public function onSpreadAnyEditBlock( $user, bool &$blockWasSpread ) {
 		return $this->container->run(
 			'SpreadAnyEditBlock',
@@ -5085,6 +5077,17 @@ class HookRunner implements
 		return $this->container->run(
 			'UserRemoveGroup',
 			[ $user, &$group ]
+		);
+	}
+
+	/** @inheritDoc */
+	public function onUserRequirementsCondition( $type, array $args, UserIdentity $user,
+		bool $isPerformingRequest, ?bool &$result
+	): void {
+		$this->container->run(
+			'UserRequirementsCondition',
+			[ $type, $args, $user, $isPerformingRequest, &$result ],
+			[ 'abortable' => false ]
 		);
 	}
 

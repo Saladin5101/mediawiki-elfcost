@@ -1156,6 +1156,7 @@ return [
 			],
 			'HiddenPrefs' => [
 			],
+			'UserJsPrefLimit' => 100,
 			'InvalidUsernameCharacters' => '@:>=',
 			'UserrightsInterwikiDelimiter' => '@',
 			'SecureLogin' => false,
@@ -1350,6 +1351,8 @@ return [
 			'GroupsAddToSelf' => [
 			],
 			'GroupsRemoveFromSelf' => [
+			],
+			'RestrictedGroups' => [
 			],
 			'RestrictionTypes' => [
 				'create',
@@ -3002,6 +3005,7 @@ return [
 			'DefaultUserOptions' => 'object',
 			'ConditionalUserOptions' => 'object',
 			'HiddenPrefs' => 'array',
+			'UserJsPrefLimit' => 'integer',
 			'AuthenticationTokenVersion' => [
 				'string',
 				'null',
@@ -3019,6 +3023,7 @@ return [
 			'ImplicitGroups' => 'array',
 			'GroupsAddToSelf' => 'object',
 			'GroupsRemoveFromSelf' => 'object',
+			'RestrictedGroups' => 'object',
 			'RestrictionTypes' => 'array',
 			'RestrictionLevels' => 'array',
 			'CascadingRestrictionLevels' => 'array',

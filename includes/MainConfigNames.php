@@ -2655,6 +2655,12 @@ class MainConfigNames {
 	public const HiddenPrefs = 'HiddenPrefs';
 
 	/**
+	 * Name constant for the UserJsPrefLimit setting, for use with Config::get()
+	 * @see MainConfigSchema::UserJsPrefLimit
+	 */
+	public const UserJsPrefLimit = 'UserJsPrefLimit';
+
+	/**
 	 * Name constant for the InvalidUsernameCharacters setting, for use with Config::get()
 	 * @see MainConfigSchema::InvalidUsernameCharacters
 	 */
@@ -2797,6 +2803,12 @@ class MainConfigNames {
 	 * @see MainConfigSchema::GroupsRemoveFromSelf
 	 */
 	public const GroupsRemoveFromSelf = 'GroupsRemoveFromSelf';
+
+	/**
+	 * Name constant for the RestrictedGroups setting, for use with Config::get()
+	 * @see MainConfigSchema::RestrictedGroups
+	 */
+	public const RestrictedGroups = 'RestrictedGroups';
 
 	/**
 	 * Name constant for the RestrictionTypes setting, for use with Config::get()
